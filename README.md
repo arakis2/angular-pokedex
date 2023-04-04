@@ -1,4 +1,5 @@
 # NgPokemonApp
+This project is a tutorial full project from scratch from [Angular Tutorial Français pour Débutant - Cours complet 9h [2022]](https://www.youtube.com/watch?v=DTIYVffhJuU). A lot of thanks for the author !
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
 
