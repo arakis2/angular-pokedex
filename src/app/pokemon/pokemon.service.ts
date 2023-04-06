@@ -32,19 +32,37 @@ export class PokemonService {
     return of(errorValue);
   }
 
-  updatePokemon(pokemon: Pokemon): Pokemon|undefined{
+  updatePokemon(pokemon: Pokemon): Observable<null>{
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
 
-    this.httpClient.put('api/pokemons', pokemon, httpOptions).pipe(
+    return this.httpClient.put('api/pokemons', pokemon, httpOptions).pipe(
       tap((response) => {
         this.log(response);
-        return pokemon;
       }),
-      catchError((error) => this.handleError(error, undefined))
+      catchError((error) => this.handleError(error, null))
     );
-
-    return undefined;
   }
+
+  deletePokemon(pokemonId: number): Observable<null>{
+    return this.httpClient.delete(`api/pokemons/${pokemonId}`).pipe(
+      tap((pokemon: any) => this.log(pokemon)),
+      catchError((error) => this.handleError(error, []))
+    );
+  }
+
+  addPokemon(pokemon: Pokemon): Observable<Pokemon>{
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+
+    return this.httpClient.post<Pokemon>('api/pokemons', pokemon, httpOptions).pipe(
+      tap((response) => {
+        this.log(response);
+      }),
+      catchError((error) => this.handleError(error, null))
+    );
+  }
+
 }

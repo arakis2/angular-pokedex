@@ -16,6 +16,20 @@
                   Le nom du pokémon est requis (1-25).
             </div>
           </div>
+
+           <!-- Pokemon picture -->
+           <div *ngIf="isNew" class="form-group">
+            <label for="picture">Image</label>
+            <input type="url" class="form-control" id="picture"
+                    required
+                    pattern="^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$"
+                   [(ngModel)]="pokemon.picture" name="picture"
+                   #picture="ngModel">   
+            <div [hidden]="picture.valid || picture.pristine"
+                  class="card-panel red accent-1">
+                  L'image du pokémon est requise.
+            </div>
+          </div>
     
           <!-- Pokemon hp -->
           <div class="form-group">
