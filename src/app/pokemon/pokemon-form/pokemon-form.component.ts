@@ -21,7 +21,7 @@ export class PokemonFormComponent implements OnInit {
 
   ngOnInit(): void{
     this.isNew = this.pokemon.id == undefined;
-    this.pokemonService.getPokemonList().subscribe((pokemons) => this.types = [...new Set(pokemons?.flatMap(p => p.types))]);   
+    this.pokemonService.getPokemonList().subscribe((pokemons) => this.types = [...new Set(pokemons?.flatMap(p => p.types))].sort((a, b) => (a > b ? 1 : -1)));   
   }
 
   hasType(type: string): boolean{
