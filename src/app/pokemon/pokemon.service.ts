@@ -16,6 +16,12 @@ export class PokemonService {
     )
   }
 
+  // testValentin() :string[]{
+  //   var pokemonList: Pokemon[];
+  //   this.getPokemonList().subscribe((pokemons) => pokemonList = pokemons);
+  //   return [...new Set(pokemonList?.flatMap(p => p.types))]
+  // }
+
   getPokemonById(pokemonId: number): Observable<Pokemon|undefined>{
     return this.httpClient.get(`api/pokemons/${pokemonId}`).pipe(
       tap((pokemon: any) => this.log(pokemon)),
@@ -64,5 +70,16 @@ export class PokemonService {
       catchError((error) => this.handleError(error, null))
     );
   }
+
+  searchPokemonList(term: string): Observable<Pokemon[]>{
+    return this.httpClient.get<Pokemon[]>(`api/pokemons/?name=${term}`).pipe(
+      tap((response) => {
+        this.log(response);
+      }),
+      catchError((error) => this.handleError(error, []))
+    );
+  }
+
+  
 
 }
